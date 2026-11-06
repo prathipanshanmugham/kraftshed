@@ -1,0 +1,39 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-06T07:10:00Z"},
+  "title": "Kraftshed — Buyer & Kraftseller UI Prototype",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 1760, "title": "Home — kraftshed.com", "expand": "fill", "is_interactive": true},
+    "Search.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 1360, "title": "Search results / Category", "expand": "fill", "is_interactive": true},
+    "Product.dc.html": {"x": 2720, "y": 0, "w": 1280, "h": 1520, "title": "Product detail", "expand": "fill", "is_interactive": true},
+    "Cart.dc.html": {"x": 4080, "y": 0, "w": 1280, "h": 960, "title": "Cart", "expand": "fill", "is_interactive": true},
+    "Checkout.dc.html": {"x": 5440, "y": 0, "w": 1280, "h": 1180, "title": "Checkout (Razorpay)", "expand": "fill", "is_interactive": true},
+    "OrderConfirmed.dc.html": {"x": 6800, "y": 0, "w": 1280, "h": 860, "title": "Order confirmed", "expand": "fill", "is_interactive": true},
+    "Login.dc.html": {"x": 0, "y": 2150, "w": 1280, "h": 780, "title": "Sign in / Create account", "expand": "fill", "is_interactive": true},
+    "Account.dc.html": {"x": 1360, "y": 2150, "w": 1280, "h": 920, "title": "Your account", "expand": "fill", "is_interactive": true},
+    "Orders.dc.html": {"x": 2720, "y": 2150, "w": 1280, "h": 980, "title": "Your orders", "expand": "fill", "is_interactive": true},
+    "Wishlist.dc.html": {"x": 4080, "y": 2150, "w": 1280, "h": 860, "title": "Wishlist", "expand": "fill", "is_interactive": true},
+    "SellerLogin.dc.html": {"x": 0, "y": 3450, "w": 1280, "h": 780, "title": "Kraftseller — Sign in / Register", "expand": "fill", "is_interactive": true},
+    "SellerDashboard.dc.html": {"x": 1360, "y": 3450, "w": 1280, "h": 1080, "title": "Kraftseller — Dashboard", "expand": "fill", "is_interactive": true},
+    "SellerProducts.dc.html": {"x": 2720, "y": 3450, "w": 1280, "h": 1060, "title": "Kraftseller — Inventory", "expand": "fill", "is_interactive": true},
+    "SellerAddProduct.dc.html": {"x": 4080, "y": 3450, "w": 1280, "h": 1420, "title": "Kraftseller — Add a product", "expand": "fill", "is_interactive": true},
+    "SellerOrders.dc.html": {"x": 5440, "y": 3450, "w": 1280, "h": 1060, "title": "Kraftseller — Orders", "expand": "fill", "is_interactive": true},
+    "SellerPayments.dc.html": {"x": 6800, "y": 3450, "w": 1280, "h": 980, "title": "Kraftseller — Payments", "expand": "fill", "is_interactive": true},
+    "Admin.dc.html": {"x": 0, "y": 5250, "w": 1280, "h": 1040, "title": "Kraftshed Admin — Super admin", "expand": "fill", "is_interactive": true}
+  },
+  "order": [
+    "Main.dc.html", "Search.dc.html", "Product.dc.html", "Cart.dc.html", "Checkout.dc.html", "OrderConfirmed.dc.html",
+    "Login.dc.html", "Account.dc.html", "Orders.dc.html", "Wishlist.dc.html",
+    "SellerLogin.dc.html", "SellerDashboard.dc.html", "SellerProducts.dc.html", "SellerAddProduct.dc.html", "SellerOrders.dc.html", "SellerPayments.dc.html",
+    "Admin.dc.html"
+  ],
+  "notes": {
+    "n1": {"x": 0, "y": -300, "text": "Buyer — kraftshed.com · shopping flow (click any header link or button to move between screens)", "kind": "title1", "maxW": 8080},
+    "n2": {"x": 0, "y": 1850, "text": "Buyer — account pages", "kind": "title1", "maxW": 5360},
+    "n3": {"x": 0, "y": 3150, "text": "Kraftseller — seller.kraftshed.com (Seller Central)", "kind": "title1", "maxW": 8080},
+    "n4": {"x": 0, "y": 4950, "text": "Admin — admin.kraftshed.com", "kind": "title1", "maxW": 1280}
+  },
+  "designSystems": []
+}

@@ -71,7 +71,9 @@ YML
 # Kraftshed marketplace (added by kraftshed/deploy/bootstrap.sh)
 ${DOMAIN}, www.${DOMAIN} {
     encode gzip
-    request_body { max_size 20MB }
+    request_body {
+        max_size 20MB
+    }
     reverse_proxy kraftshed-web:3000
 }
 CADDY

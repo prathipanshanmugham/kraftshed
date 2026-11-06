@@ -9,9 +9,17 @@ cd "$(dirname "$0")/.."
 
 echo "==> [1/6] Installing Docker, Nginx, Certbot"
 export DEBIAN_FRONTEND=noninteractive
-apt-get update -qq && apt-get install -y -qq ca-certificates curl git nginx ufw certbot python3-certbot-nginx >/dev/null
+apt-get update -qq && apt-get install -y -qq ca-certificates curl git nginx certbot python3-certbot-nginx >/dev/null
 command -v docker >/dev/null || curl -fsSL https://get.docker.com | sh >/dev/null
-ufw allow OpenSSH >/dev/null && ufw allow 'Nginx Full' >/dev/null && ufw --force enable >/dev/null
+# Firewall: only open ports, never enable/reset a firewall on a server that already hosts other sites
+if command -v ufw >/dev/null && ufw status | grep -q "Status: active"; then ufw allow 'Nginx Full' >/dev/null || true; fi
+# Another web server (Apache) on port 80 would conflict with Nginx
+if ss -ltnp | grep -q ':80 ' && ! ss -ltnp | grep ':80 ' | grep -q nginx; then
+  echo "!! Port 80 is used by something other than Nginx ($(ss -ltnp | grep ':80 ' | grep -oE 'users:\(\("[^"]+' | head -1 | cut -d'"' -f2)). Stop it or put Kraftshed behind it. Aborting."; exit 1
+fi
+# Pick a free local port for the app (default 3000; the existing Triagon site may already use it)
+APP_PORT=3000; while ss -ltn | grep -q ":${APP_PORT} "; do APP_PORT=$((APP_PORT+1)); done
+echo "    Kraftshed will listen on 127.0.0.1:${APP_PORT}"
 
 echo "==> [2/6] Writing .env"
 if [ ! -f .env ]; then
@@ -33,12 +41,13 @@ ENV
 else
   echo "    .env already exists, keeping it"
 fi
+export APP_PORT
 export POSTGRES_PASSWORD="$(grep -E '^DATABASE_URL=' .env | sed -E 's|.*://[^:]+:([^@]+)@.*|\1|')"
 
 echo "==> [3/6] Nginx site for ${DOMAIN}"
-sed "s/kraftshed.com/${DOMAIN}/g" deploy/nginx.conf > /etc/nginx/sites-available/${DOMAIN}
+sed -e "s/kraftshed.com/${DOMAIN}/g" -e "s/127.0.0.1:3000/127.0.0.1:${APP_PORT}/" deploy/nginx.conf > /etc/nginx/sites-available/${DOMAIN}
 ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/${DOMAIN}
-rm -f /etc/nginx/sites-enabled/default
+# (existing sites in sites-enabled are left untouched)
 nginx -t -q && systemctl reload nginx
 
 echo "==> [4/6] Building and starting the app (this takes 3-6 minutes)"

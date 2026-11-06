@@ -1,6 +1,8 @@
+name: kraftshed
 services:
   db:
     image: postgres:16-alpine
+    container_name: kraftshed-db
     restart: unless-stopped
     environment:
       POSTGRES_USER: kraftshed
@@ -15,13 +17,14 @@ services:
 
   web:
     build: .
+    container_name: kraftshed-web
     restart: unless-stopped
     env_file: .env
     depends_on:
       db:
         condition: service_healthy
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
     volumes:
       - uploads:/app/public/uploads
 
